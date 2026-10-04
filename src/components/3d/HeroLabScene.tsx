@@ -25,25 +25,20 @@ function LabDirectModel({ onLoaded }: { onLoaded: () => void }) {
         const scene = gltf.scene;
         const wrapper = new THREE.Group();
 
-        // Calculate raw model bounds
-        const box = new THREE.Box3().setFromObject(scene);
-        const center = new THREE.Vector3();
-        const size = new THREE.Vector3();
-        box.getCenter(center);
-        box.getSize(size);
+        // Exact pre-calculated bounds for lab.glb:
+        // Center: (3.9787, 3.0284, 1.5249), Max dimension: 14.157
+        const center = new THREE.Vector3(3.9787, 3.0284, 1.5249);
+        const maxDim = 14.157;
 
         // Center inner scene at (0, 0, 0)
         scene.position.set(-center.x, -center.y, -center.z);
         wrapper.add(scene);
 
-        // Scale model comfortably within view
-        const maxDim = Math.max(size.x, size.y, size.z);
-        if (maxDim > 0) {
-          const scaleFactor = 4.5 / maxDim;
-          wrapper.scale.set(scaleFactor, scaleFactor, scaleFactor);
-        }
+        // Normalize size so model floats comfortably in view
+        const scaleFactor = 6.2 / maxDim;
+        wrapper.scale.set(scaleFactor, scaleFactor, scaleFactor);
 
-        // Adjust materials for rich dark-navy contrast & avoid white washed-out glare
+        // Enhance material rendering for rich 3D details
         scene.traverse((child) => {
           if ((child as THREE.Mesh).isMesh) {
             const mesh = child as THREE.Mesh;
@@ -53,15 +48,13 @@ function LabDirectModel({ onLoaded }: { onLoaded: () => void }) {
               const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
               materials.forEach((mat) => {
                 mat.side = THREE.DoubleSide;
-                // Avoid blinding white bloom
-                if ('roughness' in mat) (mat as THREE.MeshStandardMaterial).roughness = 0.4;
-                if ('metalness' in mat) (mat as THREE.MeshStandardMaterial).metalness = 0.2;
+                if ('envMapIntensity' in mat) (mat as THREE.MeshStandardMaterial).envMapIntensity = 1.2;
               });
             }
           }
         });
 
-        // Set into group ref
+        // Clear ref and append centered wrapper
         if (groupRef.current) {
           while (groupRef.current.children.length > 0) {
             groupRef.current.remove(groupRef.current.children[0]);
@@ -73,7 +66,7 @@ function LabDirectModel({ onLoaded }: { onLoaded: () => void }) {
       undefined,
       (error) => {
         console.error('Error loading /models/lab.glb:', error);
-        onLoaded(); // Fallback so spinner stops
+        onLoaded();
       }
     );
 
@@ -95,14 +88,11 @@ export const HeroLabScene: React.FC = () => {
       {/* 1. Deep Navy Hero Base Background */}
       <div className="absolute inset-0 bg-[#02006F] pointer-events-none" />
 
-      {/* 2. Radial & Linear Contrast Gradient (Ensures White Text is 100% Crisp & Readable) */}
+      {/* 2. Soft Radial Glow behind 3D Model (Ensures 3D Model is Bright & Clear) */}
       <div 
-        className="absolute inset-0 z-10 pointer-events-none"
+        className="absolute inset-0 z-0 pointer-events-none"
         style={{
-          background: `
-            radial-gradient(circle at center, rgba(2,0,111,0.72) 0%, rgba(2,0,111,0.88) 55%, rgba(2,0,111,0.98) 100%),
-            linear-gradient(to bottom, rgba(2,0,111,0.9) 0%, transparent 30%, transparent 70%, rgba(2,0,111,0.95) 100%)
-          `
+          background: 'radial-gradient(circle at center, rgba(31,35,102,0.55) 0%, rgba(2,0,111,0.92) 75%, rgba(2,0,111,1) 100%)'
         }}
       />
 
@@ -110,22 +100,22 @@ export const HeroLabScene: React.FC = () => {
       {!loaded && (
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 flex items-center space-x-3 bg-[#02006F]/95 text-white px-6 py-3.5 rounded-2xl border border-[#FFC000]/40 font-sans text-sm shadow-2xl backdrop-blur-lg">
           <div className="w-5 h-5 border-2 border-[#FFC000] border-t-transparent rounded-full animate-spin" />
-          <span className="font-semibold">{`Chargement du modèle 3D (lab.glb)...`}</span>
+          <span className="font-semibold">Chargement du modèle 3D (lab.glb)...</span>
         </div>
       )}
 
       {/* 4. Interactive 3D Canvas */}
       <Canvas
-        className="w-full h-full relative z-0 cursor-grab active:cursor-grabbing"
+        className="w-full h-full relative z-10 cursor-grab active:cursor-grabbing"
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-        camera={{ position: [0, 2.0, 7.5], fov: 45, near: 0.1, far: 1000 }}
+        camera={{ position: [0, 1.8, 7.0], fov: 45, near: 0.1, far: 1000 }}
       >
-        {/* Soft balanced studio lighting */}
-        <ambientLight intensity={0.9} color="#FFFFFF" />
-        <hemisphereLight skyColor="#E0E8FF" groundColor="#02006F" intensity={1.1} />
-        <directionalLight position={[12, 20, 15]} intensity={1.8} color="#FFFFFF" castShadow />
-        <directionalLight position={[-12, 12, -12]} intensity={1.2} color="#FFC000" />
-        <pointLight position={[0, 6, 0]} intensity={1.4} color="#FFFFFF" />
+        {/* Bright Studio Lighting */}
+        <ambientLight intensity={1.8} color="#FFFFFF" />
+        <hemisphereLight skyColor="#FFFFFF" groundColor="#02006F" intensity={1.5} />
+        <directionalLight position={[15, 22, 15]} intensity={2.5} color="#FFFFFF" castShadow />
+        <directionalLight position={[-15, 12, -15]} intensity={1.6} color="#FFC000" />
+        <pointLight position={[0, 8, 0]} intensity={2.0} color="#FFFFFF" />
 
         <LabDirectModel onLoaded={() => setLoaded(true)} />
 
@@ -134,7 +124,7 @@ export const HeroLabScene: React.FC = () => {
           enableZoom={false}
           enablePan={false}
           autoRotate={true}
-          autoRotateSpeed={1.0}
+          autoRotateSpeed={1.2}
           minPolarAngle={Math.PI / 2.25}
           maxPolarAngle={Math.PI / 2.25}
         />
