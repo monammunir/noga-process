@@ -5,7 +5,13 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 
-function LabDirectModel({ onLoaded }: { onLoaded: () => void }) {
+function LabDirectModel({ 
+  onLoaded, 
+  onProgress 
+}: { 
+  onLoaded: () => void; 
+  onProgress: (percent: number) => void;
+}) {
   const groupRef = useRef<THREE.Group>(null);
 
   useEffect(() => {
@@ -25,36 +31,54 @@ function LabDirectModel({ onLoaded }: { onLoaded: () => void }) {
         const scene = gltf.scene;
         const wrapper = new THREE.Group();
 
-        // Exact pre-calculated bounds for lab.glb:
-        // Center: (3.9787, 3.0284, 1.5249), Max dimension: 14.157
-        const center = new THREE.Vector3(3.9787, 3.0284, 1.5249);
-        const maxDim = 14.157;
+        // Keywords of outer white room wall/floor box meshes to hide
+        const hideKeywords = ['sciana', 'podloga', 'podoga', 'panel3', 'szybka'];
 
-        // Center inner scene at (0, 0, 0)
-        scene.position.set(-center.x, -center.y, -center.z);
-        wrapper.add(scene);
-
-        // Normalize size so model floats comfortably in view
-        const scaleFactor = 6.2 / maxDim;
-        wrapper.scale.set(scaleFactor, scaleFactor, scaleFactor);
-
-        // Enhance material rendering for rich 3D details
         scene.traverse((child) => {
           if ((child as THREE.Mesh).isMesh) {
             const mesh = child as THREE.Mesh;
-            mesh.castShadow = true;
-            mesh.receiveShadow = true;
-            if (mesh.material) {
-              const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
-              materials.forEach((mat) => {
-                mat.side = THREE.DoubleSide;
-                if ('envMapIntensity' in mat) (mat as THREE.MeshStandardMaterial).envMapIntensity = 1.2;
-              });
+            const matName = (mesh.material && !Array.isArray(mesh.material) && mesh.material.name)
+              ? mesh.material.name.toLowerCase()
+              : '';
+            const meshName = mesh.name ? mesh.name.toLowerCase() : '';
+
+            // Hide outer white room box meshes while preserving equipment
+            const isWallOrFloor = hideKeywords.some(kw => matName.includes(kw) || meshName.includes(kw));
+
+            if (isWallOrFloor && !matName.includes('duz_soik') && !matName.includes('stolik') && !matName.includes('soik')) {
+              mesh.visible = false;
+            } else {
+              mesh.castShadow = true;
+              mesh.receiveShadow = true;
+              if (mesh.material) {
+                const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+                materials.forEach((mat) => {
+                  mat.side = THREE.DoubleSide;
+                });
+              }
             }
           }
         });
 
-        // Clear ref and append centered wrapper
+        // Calculate precision bounds of 3D lab equipment
+        const box = new THREE.Box3().setFromObject(wrapper.children.length > 0 ? wrapper : scene);
+        const center = new THREE.Vector3();
+        const size = new THREE.Vector3();
+        box.getCenter(center);
+        box.getSize(size);
+
+        // Center model at (0, 0, 0)
+        scene.position.set(-center.x, -center.y, -center.z);
+        wrapper.add(scene);
+
+        // Normalize max dimension to 4.4 units
+        const maxDim = Math.max(size.x, size.y, size.z);
+        if (maxDim > 0) {
+          const scaleFactor = 4.4 / maxDim;
+          wrapper.scale.set(scaleFactor, scaleFactor, scaleFactor);
+        }
+
+        // Add centered wrapper to ref
         if (groupRef.current) {
           while (groupRef.current.children.length > 0) {
             groupRef.current.remove(groupRef.current.children[0]);
@@ -63,7 +87,12 @@ function LabDirectModel({ onLoaded }: { onLoaded: () => void }) {
         }
         onLoaded();
       },
-      undefined,
+      (xhr) => {
+        if (xhr.lengthComputable && xhr.total > 0) {
+          const percent = Math.round((xhr.loaded / xhr.total) * 100);
+          onProgress(percent);
+        }
+      },
       (error) => {
         console.error('Error loading /models/lab.glb:', error);
         onLoaded();
@@ -81,45 +110,48 @@ function LabDirectModel({ onLoaded }: { onLoaded: () => void }) {
 
 export const HeroLabScene: React.FC = () => {
   const [loaded, setLoaded] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   return (
-    <div className="absolute inset-0 w-full h-full pointer-events-auto overflow-hidden">
-      
-      {/* 1. Deep Navy Hero Base Background */}
-      <div className="absolute inset-0 bg-[#02006F] pointer-events-none" />
-
-      {/* 2. Soft Radial Glow behind 3D Model (Ensures 3D Model is Bright & Clear) */}
+    <div className="relative w-full h-[480px] lg:h-[600px] flex items-center justify-center">
+      {/* Background radial glow */}
       <div 
-        className="absolute inset-0 z-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none rounded-full"
         style={{
-          background: 'radial-gradient(circle at center, rgba(31,35,102,0.55) 0%, rgba(2,0,111,0.92) 75%, rgba(2,0,111,1) 100%)'
+          background: 'radial-gradient(circle at center, rgba(255,192,0,0.25) 0%, rgba(31,35,102,0.4) 55%, transparent 75%)'
         }}
       />
 
-      {/* 3. Loading Pill Indicator */}
+      {/* Grounding Shadow */}
+      <div className="absolute bottom-4 w-3/4 h-12 grounding-shadow rounded-full pointer-events-none opacity-60" />
+
+      {/* Loading Indicator Pill */}
       {!loaded && (
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 flex items-center space-x-3 bg-[#02006F]/95 text-white px-6 py-3.5 rounded-2xl border border-[#FFC000]/40 font-sans text-sm shadow-2xl backdrop-blur-lg">
-          <div className="w-5 h-5 border-2 border-[#FFC000] border-t-transparent rounded-full animate-spin" />
-          <span className="font-semibold">Chargement du modèle 3D (lab.glb)...</span>
+        <div className="absolute z-20 flex items-center space-x-3 bg-[#02006F]/90 text-white px-4 py-2.5 rounded-xl border border-[#FFC000]/30 font-sans text-xs shadow-lg backdrop-blur-md">
+          <div className="w-4 h-4 border-2 border-[#FFC000] border-t-transparent rounded-full animate-spin" />
+          <span>{progress > 0 ? `Chargement du modèle 3D (${progress}%)...` : 'Chargement du modèle 3D...'}</span>
         </div>
       )}
 
-      {/* 4. Interactive 3D Canvas */}
+      {/* Canvas */}
       <Canvas
         className="w-full h-full relative z-10 cursor-grab active:cursor-grabbing"
-        gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-        camera={{ position: [0, 1.8, 7.0], fov: 45, near: 0.1, far: 1000 }}
+        gl={{ antialias: true, alpha: true }}
+        camera={{ position: [3.2, 2.2, 4.0], fov: 45, near: 0.1, far: 1000 }}
       >
-        {/* Bright Studio Lighting */}
+        {/* Studio Lights */}
         <ambientLight intensity={1.8} color="#FFFFFF" />
         <hemisphereLight skyColor="#FFFFFF" groundColor="#02006F" intensity={1.5} />
-        <directionalLight position={[15, 22, 15]} intensity={2.5} color="#FFFFFF" castShadow />
-        <directionalLight position={[-15, 12, -15]} intensity={1.6} color="#FFC000" />
-        <pointLight position={[0, 8, 0]} intensity={2.0} color="#FFFFFF" />
+        <directionalLight position={[15, 20, 15]} intensity={2.5} color="#FFFFFF" castShadow />
+        <directionalLight position={[-15, 10, -15]} intensity={1.5} color="#FFC000" />
+        <pointLight position={[0, 5, 0]} intensity={2.0} color="#FFFFFF" />
 
-        <LabDirectModel onLoaded={() => setLoaded(true)} />
+        <LabDirectModel 
+          onLoaded={() => setLoaded(true)} 
+          onProgress={(p) => setProgress(p)} 
+        />
 
-        {/* OrbitControls: Horizontal Y-axis rotation ONLY (left/right drag), NO up/down tilt, NO zoom, NO pan */}
+        {/* OrbitControls: Horizontal Y-axis rotation ONLY (left/right drag), NO UP/DOWN tilt, NO ZOOM, NO PAN */}
         <OrbitControls
           enableZoom={false}
           enablePan={false}

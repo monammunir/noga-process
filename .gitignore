@@ -12,9 +12,8 @@ dist
 dist-ssr
 *.local
 
-# Large 3D binary models (>100MB GitHub limit)
+# Raw original uncompressed 447MB file in root
 lab.glb
-public/models/lab.glb
 
 # Editor directories and files
 .vscode/*
