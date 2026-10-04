@@ -16,13 +16,13 @@ export const ExpertiseSection: React.FC<ExpertiseSectionProps> = ({ lang, onOpen
     <section id="expertise" className="py-20 lg:py-24 bg-[#F7F8FC] text-[#111827] overflow-hidden">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         
-        {/* Financial Warning Banner: White background, Deep Blue hover glow */}
+        {/* Financial Warning Banner with Slow Dramatic Animation & Light Blue Glow */}
         <motion.div
-          initial={{ opacity: 0, y: 35 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.15 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="bg-white text-[#02006F] p-7 sm:p-8 rounded-2xl border-l-4 border-l-[#FFC000] border border-gray-200/80 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-sm hover:border-[#02006F] hover:shadow-[0_0_30px_rgba(2,0,111,0.2)] hover:-translate-y-1 transition-all duration-300"
+          initial={{ opacity: 0, y: 65, scale: 0.94 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: false, amount: 0.12 }}
+          transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+          className="bg-white text-[#02006F] p-7 sm:p-8 rounded-2xl border-l-4 border-l-[#FFC000] border border-gray-200/80 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-sm hover:border-[#38BDF8] hover:shadow-[0_15px_40px_rgba(56,189,248,0.45)] hover:-translate-y-2 transition-all duration-500"
         >
           <div className="flex items-start space-x-4 max-w-3xl">
             <div className="p-3 bg-[#FFC000]/15 rounded-xl text-[#FFC000] border border-[#FFC000]/40 flex-shrink-0">
@@ -39,7 +39,7 @@ export const ExpertiseSection: React.FC<ExpertiseSectionProps> = ({ lang, onOpen
           </div>
           <button
             onClick={onOpenContact}
-            className="btn-yellow h-12 px-6 text-[16px] font-extrabold whitespace-nowrap flex-shrink-0 shadow-md rounded-xl text-[#02006F] hover:scale-105 transition-transform"
+            className="btn-yellow h-12 px-6 text-[16px] font-extrabold whitespace-nowrap flex-shrink-0 shadow-md rounded-xl text-[#02006F] hover:scale-105 transition-transform cursor-pointer"
           >
             {lang === 'fr' ? 'Diagnostic 30 min offert' : 'Free 30-min Diagnostic'}
           </button>
@@ -47,10 +47,10 @@ export const ExpertiseSection: React.FC<ExpertiseSectionProps> = ({ lang, onOpen
 
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.2 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: 50, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: false, amount: 0.15 }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-3xl text-left space-y-2"
         >
           <span className="font-display font-extrabold text-[14px] uppercase tracking-wider text-[#02006F] block">
@@ -63,20 +63,20 @@ export const ExpertiseSection: React.FC<ExpertiseSectionProps> = ({ lang, onOpen
           </h2>
         </motion.div>
 
-        {/* Editorial Service Rows: Deep Blue hover glow */}
-        <div className="space-y-5">
+        {/* Editorial Service Cards with Dramatic Slow Animation & Light Blue Glow */}
+        <div className="space-y-6">
           {SERVICES.map((service, index) => (
             <motion.div
               key={service.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.15 }}
-              transition={{ duration: 0.7, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-white p-7 lg:p-8 rounded-2xl border border-gray-200/80 shadow-sm hover:border-[#02006F] hover:shadow-[0_0_30px_rgba(2,0,111,0.2)] hover:-translate-y-1.5 transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center group cursor-pointer"
+              initial={{ opacity: 0, y: 70, scale: 0.93 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: false, amount: 0.12 }}
+              transition={{ duration: 1.0, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-white p-7 lg:p-8 rounded-2xl border border-gray-200/80 shadow-md hover:border-[#38BDF8] hover:shadow-[0_18px_45px_rgba(56,189,248,0.45)] hover:-translate-y-2.5 transition-all duration-500 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center group cursor-pointer"
               onClick={() => setSelectedService(service)}
             >
-              {/* Numbering on left */}
-              <div className="lg:col-span-1 font-display font-black text-[26px] text-[#FFC000] group-hover:text-[#02006F] transition-colors">
+              {/* Numbering */}
+              <div className="lg:col-span-1 font-display font-black text-[28px] text-[#FFC000] group-hover:text-[#38BDF8] transition-colors duration-300">
                 0{index + 1}
               </div>
 
@@ -85,12 +85,12 @@ export const ExpertiseSection: React.FC<ExpertiseSectionProps> = ({ lang, onOpen
                 <span className="font-display font-extrabold text-[14px] uppercase text-[#02006F] tracking-wider block">
                   {lang === 'fr' ? service.category : service.categoryEn}
                 </span>
-                <h3 className="font-display font-black text-[22px] sm:text-[24px] text-[#02006F] group-hover:text-[#1F2366] transition-colors leading-snug">
+                <h3 className="font-display font-black text-[22px] sm:text-[24px] text-[#02006F] group-hover:text-[#38BDF8] transition-colors duration-300 leading-snug">
                   {lang === 'fr' ? service.title : service.titleEn}
                 </h3>
               </div>
 
-              {/* Body Content Description */}
+              {/* Description */}
               <div className="lg:col-span-5 text-[17px] sm:text-[18px] text-[#475569] leading-[1.65] font-sans">
                 {lang === 'fr' ? service.shortDesc : service.shortDescEn}
               </div>
@@ -102,23 +102,23 @@ export const ExpertiseSection: React.FC<ExpertiseSectionProps> = ({ lang, onOpen
                     e.stopPropagation();
                     setSelectedService(service);
                   }}
-                  className="inline-flex items-center space-x-1 font-display font-black text-[16px] text-[#02006F] group-hover:text-[#1F2366] transition-colors tracking-wide"
+                  className="inline-flex items-center space-x-1 font-display font-black text-[16px] text-[#02006F] group-hover:text-[#38BDF8] transition-colors duration-300 tracking-wide"
                 >
                   <span>{lang === 'fr' ? 'EN SAVOIR PLUS' : 'LEARN MORE'}</span>
-                  <ArrowUpRight className="w-4.5 h-4.5 ml-0.5 text-[#02006F] group-hover:text-[#1F2366] transition-colors" />
+                  <ArrowUpRight className="w-5 h-5 ml-0.5 text-[#02006F] group-hover:text-[#38BDF8] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
                 </button>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Advanced Technologies: Deep Blue hover glow */}
+        {/* Advanced Technologies */}
         <div className="pt-8 space-y-8">
           <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.7 }}
+            initial={{ opacity: 0, y: 50, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: false, amount: 0.15 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-2xl space-y-1"
           >
             <span className="font-display font-extrabold text-[14px] uppercase tracking-wider text-[#02006F]">
@@ -133,14 +133,14 @@ export const ExpertiseSection: React.FC<ExpertiseSectionProps> = ({ lang, onOpen
             {ADVANCED_TECHS.map((tech, idx) => (
               <motion.div
                 key={tech.id}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.15 }}
-                transition={{ duration: 0.7, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-[#1F2366] text-white p-7 rounded-2xl border border-white/10 shadow-sm hover:border-[#FFC000] hover:shadow-[0_0_30px_rgba(255,192,0,0.25)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group cursor-pointer"
+                initial={{ opacity: 0, y: 70, scale: 0.93 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: false, amount: 0.12 }}
+                transition={{ duration: 1.0, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                className="bg-[#1F2366] text-white p-7 rounded-2xl border border-white/10 shadow-md hover:border-[#38BDF8] hover:shadow-[0_18px_45px_rgba(56,189,248,0.5)] hover:-translate-y-2.5 transition-all duration-500 flex flex-col justify-between group cursor-pointer"
               >
                 <div className="space-y-3">
-                  <h4 className="font-display font-black text-[22px] text-[#FFC000] group-hover:text-white transition-colors leading-snug">
+                  <h4 className="font-display font-black text-[22px] text-[#FFC000] group-hover:text-[#38BDF8] transition-colors duration-300 leading-snug">
                     {lang === 'fr' ? tech.titleFr : tech.titleEn}
                   </h4>
                   <p className="text-[17px] sm:text-[18px] text-white/90 leading-[1.65] font-sans">
@@ -158,13 +158,14 @@ export const ExpertiseSection: React.FC<ExpertiseSectionProps> = ({ lang, onOpen
       {selectedService && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#02006F]/80 backdrop-blur-md animate-fadeIn">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4 }}
             className="bg-white border border-gray-200 text-[#111827] max-w-2xl w-full p-8 rounded-2xl shadow-2xl relative space-y-6 max-h-[90vh] overflow-y-auto"
           >
             <button
               onClick={() => setSelectedService(null)}
-              className="absolute top-6 right-6 p-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200"
+              className="absolute top-6 right-6 p-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -198,7 +199,7 @@ export const ExpertiseSection: React.FC<ExpertiseSectionProps> = ({ lang, onOpen
             <div className="pt-4 border-t border-gray-200 flex justify-end space-x-4">
               <button
                 onClick={() => setSelectedService(null)}
-                className="px-5 py-2.5 rounded-xl bg-gray-100 text-[15px] font-semibold text-gray-700 hover:bg-gray-200 font-sans"
+                className="px-5 py-2.5 rounded-xl bg-gray-100 text-[15px] font-semibold text-gray-700 hover:bg-gray-200 font-sans cursor-pointer"
               >
                 Fermer
               </button>
@@ -207,7 +208,7 @@ export const ExpertiseSection: React.FC<ExpertiseSectionProps> = ({ lang, onOpen
                   setSelectedService(null);
                   onOpenContact();
                 }}
-                className="btn-yellow px-6 py-2.5 text-[16px] font-extrabold rounded-xl text-[#02006F]"
+                className="btn-yellow px-6 py-2.5 text-[16px] font-extrabold rounded-xl text-[#02006F] cursor-pointer"
               >
                 {lang === 'fr' ? 'Contactez-nous' : 'Contact Us'}
               </button>

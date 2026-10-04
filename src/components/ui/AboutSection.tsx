@@ -15,48 +15,68 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ lang }) => {
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          {/* Left Column: Authentic Photography & White Metrics Cards with Blue Hover Glow */}
+          {/* Left Column: Authentic Photography & White Metrics Cards */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 65, scale: 0.94 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: false, amount: 0.12 }}
+            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-5 space-y-6"
           >
-            <div className="rounded-2xl overflow-hidden shadow-sm border border-gray-200/80 bg-white">
+            <div className="rounded-2xl overflow-hidden shadow-md border border-gray-200/80 bg-white">
               <img
                 src="/images/pharma.jpg"
                 alt="Noga Process Ingénierie Industrielle"
-                className="w-full h-80 object-cover"
+                className="w-full h-80 object-cover hover:scale-105 transition-transform duration-700 ease-out"
                 onError={(e) => {
                   (e.target as HTMLElement).style.display = 'none';
                 }}
               />
             </div>
 
-            {/* Verified Metrics - White Cards with Deep Blue Glow */}
+            {/* Verified Metrics Cards with Light Blue Glow & Slow Dramatic Animation */}
             <div className="grid grid-cols-3 gap-4 text-center">
-              <div className="p-4 sm:p-5 bg-white text-[#02006F] rounded-2xl border border-gray-200/80 shadow-sm hover:border-[#02006F] hover:shadow-[0_0_25px_rgba(2,0,111,0.2)] hover:-translate-y-1 transition-all duration-300 space-y-1 group cursor-pointer">
-                <span className="block font-display font-black text-[20px] sm:text-[22px] text-[#02006F]">185k€ → 150M€</span>
+              <motion.div
+                initial={{ opacity: 0, y: 50, scale: 0.92 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: false, amount: 0.15 }}
+                transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="p-4 sm:p-5 bg-white text-[#02006F] rounded-2xl border border-gray-200/80 shadow-md hover:border-[#38BDF8] hover:shadow-[0_15px_35px_rgba(56,189,248,0.45)] hover:-translate-y-2 transition-all duration-500 space-y-1 group cursor-pointer"
+              >
+                <span className="block font-display font-black text-[20px] sm:text-[22px] text-[#02006F] group-hover:text-[#38BDF8] transition-colors duration-300">185k€ → 150M€</span>
                 <span className="font-sans text-[14px] sm:text-[15px] text-[#64748B] font-medium block">Échelle de projets</span>
-              </div>
-              <div className="p-4 sm:p-5 bg-white text-[#02006F] rounded-2xl border border-gray-200/80 shadow-sm hover:border-[#02006F] hover:shadow-[0_0_25px_rgba(2,0,111,0.2)] hover:-translate-y-1 transition-all duration-300 space-y-1 group cursor-pointer">
-                <span className="block font-display font-black text-[20px] sm:text-[22px] text-[#02006F]">15 km</span>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 50, scale: 0.92 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: false, amount: 0.15 }}
+                transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                className="p-4 sm:p-5 bg-white text-[#02006F] rounded-2xl border border-gray-200/80 shadow-md hover:border-[#38BDF8] hover:shadow-[0_15px_35px_rgba(56,189,248,0.45)] hover:-translate-y-2 transition-all duration-500 space-y-1 group cursor-pointer"
+              >
+                <span className="block font-display font-black text-[20px] sm:text-[22px] text-[#02006F] group-hover:text-[#38BDF8] transition-colors duration-300">15 km</span>
                 <span className="font-sans text-[14px] sm:text-[15px] text-[#64748B] font-medium block">Réseaux fluides</span>
-              </div>
-              <div className="p-4 sm:p-5 bg-white text-[#02006F] rounded-2xl border border-gray-200/80 shadow-sm hover:border-[#02006F] hover:shadow-[0_0_25px_rgba(2,0,111,0.2)] hover:-translate-y-1 transition-all duration-300 space-y-1 group cursor-pointer">
-                <span className="block font-display font-black text-[20px] sm:text-[22px] text-[#02006F]">20+ ans</span>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 50, scale: 0.92 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: false, amount: 0.15 }}
+                transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className="p-4 sm:p-5 bg-white text-[#02006F] rounded-2xl border border-gray-200/80 shadow-md hover:border-[#38BDF8] hover:shadow-[0_15px_35px_rgba(56,189,248,0.45)] hover:-translate-y-2 transition-all duration-500 space-y-1 group cursor-pointer"
+              >
+                <span className="block font-display font-black text-[20px] sm:text-[22px] text-[#02006F] group-hover:text-[#38BDF8] transition-colors duration-300">20+ ans</span>
                 <span className="font-sans text-[14px] sm:text-[15px] text-[#64748B] font-medium block">Expérience terrain</span>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
 
-          {/* Right Column: Dark-Blue Quotation Panel Focal Point */}
+          {/* Right Column: Dark-Blue Quotation Panel Focal Point with Light Blue Hover Glow */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 70, scale: 0.93 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: false, amount: 0.12 }}
+            transition={{ duration: 1.0, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-7 space-y-6"
           >
             <span className="font-display font-extrabold text-[14px] uppercase tracking-wider text-[#02006F]">
@@ -69,9 +89,9 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ lang }) => {
                 : 'Industrial Process Architect & CAPEX Decision Partner'}
             </h2>
 
-            {/* Dark Blue Quotation Panel Focal Point */}
-            <div className="p-8 sm:p-10 bg-[#1F2366] text-white rounded-2xl border-l-4 border-l-[#FFC000] border-y border-r border-white/10 shadow-md hover:shadow-[0_0_35px_rgba(255,192,0,0.25)] hover:-translate-y-1 transition-all duration-300 space-y-4 cursor-pointer group">
-              <p className="font-display font-black text-[20px] sm:text-[22px] text-white italic leading-snug">
+            {/* Quotation Panel Focal Point */}
+            <div className="p-8 sm:p-10 bg-[#1F2366] text-white rounded-2xl border-l-4 border-l-[#FFC000] border-y border-r border-white/10 shadow-lg hover:border-[#38BDF8] hover:shadow-[0_18px_45px_rgba(56,189,248,0.5)] hover:-translate-y-2 transition-all duration-500 space-y-4 cursor-pointer group">
+              <p className="font-display font-black text-[20px] sm:text-[22px] text-white italic leading-snug group-hover:text-[#38BDF8] transition-colors duration-300">
                 “{lang === 'fr' ? FOUNDER_MESSAGE.quoteFr : FOUNDER_MESSAGE.quoteEn}”
               </p>
               <p className="font-sans text-[17px] sm:text-[18px] text-white/90 leading-[1.65]">

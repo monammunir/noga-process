@@ -57,10 +57,10 @@ export const MethodSection: React.FC<MethodSectionProps> = ({ lang }) => {
         
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.2 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: 50, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: false, amount: 0.15 }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-3xl mb-16 text-left space-y-2"
         >
           <span className="font-display font-extrabold text-[14px] uppercase tracking-wider text-[#FFC000] block">
@@ -73,33 +73,33 @@ export const MethodSection: React.FC<MethodSectionProps> = ({ lang }) => {
           </h2>
         </motion.div>
 
-        {/* Spacious 2x2 Grid Layout: Wide, balanced cards with Blue hover glow */}
+        {/* 2x2 Method Card Grid with Dramatic Slow Animation & Light Blue Hover Glow */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {steps.map((item, idx) => {
             const IconComp = item.icon;
             return (
               <motion.div
                 key={item.step}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.15 }}
-                transition={{ duration: 0.7, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-white text-[#111827] p-8 sm:p-9 rounded-2xl border border-gray-200/80 shadow-sm hover:border-[#02006F] hover:shadow-[0_0_30px_rgba(2,0,111,0.25)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group cursor-pointer"
+                initial={{ opacity: 0, y: 70, scale: 0.93 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: false, amount: 0.12 }}
+                transition={{ duration: 1.0, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                className="bg-white text-[#111827] p-8 sm:p-9 rounded-2xl border border-gray-200/80 shadow-md hover:border-[#38BDF8] hover:shadow-[0_18px_45px_rgba(56,189,248,0.45)] hover:-translate-y-2.5 transition-all duration-500 flex flex-col justify-between group cursor-pointer"
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
-                      <span className="w-11 h-11 rounded-full bg-[#02006F] text-[#FFC000] flex items-center justify-center font-display font-black text-[20px] shadow-sm">
+                      <span className="w-11 h-11 rounded-full bg-[#02006F] text-[#FFC000] group-hover:bg-[#38BDF8] group-hover:text-[#02006F] transition-colors duration-300 flex items-center justify-center font-display font-black text-[20px] shadow-sm">
                         {item.step}
                       </span>
                       <span className="font-display font-extrabold text-[14px] uppercase text-[#02006F] tracking-wider">
                         {lang === 'fr' ? item.phaseFr : item.phaseEn}
                       </span>
                     </div>
-                    <IconComp className="w-6 h-6 text-[#02006F]" />
+                    <IconComp className="w-6 h-6 text-[#02006F] group-hover:text-[#38BDF8] transition-colors duration-300" />
                   </div>
 
-                  <h3 className="font-display font-black text-[24px] text-[#02006F] group-hover:text-[#1F2366] transition-colors leading-snug">
+                  <h3 className="font-display font-black text-[24px] text-[#02006F] group-hover:text-[#38BDF8] transition-colors duration-300 leading-snug">
                     {lang === 'fr' ? item.titleFr : item.titleEn}
                   </h3>
 

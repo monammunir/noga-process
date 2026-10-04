@@ -28,20 +28,20 @@ export const ContactAndTools: React.FC<ContactAndToolsProps> = ({ lang }) => {
     <section id="contact" className="py-20 lg:py-24 bg-[#02006F] text-white bg-noga-grid overflow-hidden">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Compact Calculation Tools Banner: White Background + Blue Glow */}
+        {/* Compact Calculation Tools Banner with Light Blue Hover Glow */}
         <motion.div
-          initial={{ opacity: 0, y: 35 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.15 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-16 p-8 sm:p-10 rounded-2xl bg-white text-[#02006F] border border-gray-200/80 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm hover:border-[#02006F] hover:shadow-[0_0_30px_rgba(2,0,111,0.25)] hover:-translate-y-1 transition-all duration-300 group cursor-pointer"
+          initial={{ opacity: 0, y: 65, scale: 0.94 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: false, amount: 0.12 }}
+          transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-16 p-8 sm:p-10 rounded-2xl bg-white text-[#02006F] border border-gray-200/80 flex flex-col md:flex-row items-center justify-between gap-6 shadow-md hover:border-[#38BDF8] hover:shadow-[0_18px_45px_rgba(56,189,248,0.45)] hover:-translate-y-2 transition-all duration-500 group cursor-pointer"
         >
           <div className="flex items-center space-x-4">
             <div className="p-3.5 rounded-xl bg-[#FFC000]/15 text-[#02006F] border border-[#FFC000]/40 flex-shrink-0">
-              <Calculator className="w-7 h-7 text-[#02006F]" />
+              <Calculator className="w-7 h-7 text-[#02006F] group-hover:text-[#38BDF8] transition-colors duration-300" />
             </div>
             <div>
-              <h3 className="font-display font-black text-[22px] sm:text-[24px] text-[#02006F]">
+              <h3 className="font-display font-black text-[22px] sm:text-[24px] text-[#02006F] group-hover:text-[#38BDF8] transition-colors duration-300">
                 {lang === 'fr' ? 'Outils de Calcul Procédés Industriels' : 'Industrial Process Calculation Tools'}
               </h3>
               <p className="text-[17px] sm:text-[18px] text-[#475569] mt-1 font-sans leading-[1.65]">
@@ -56,7 +56,7 @@ export const ContactAndTools: React.FC<ContactAndToolsProps> = ({ lang }) => {
             href={COMPANY_INFO.calculatorUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-yellow h-12 px-6 text-[16px] font-extrabold flex items-center space-x-2 whitespace-nowrap flex-shrink-0 rounded-xl text-[#02006F] hover:scale-105 transition-transform shadow-md"
+            className="btn-yellow h-12 px-6 text-[16px] font-extrabold flex items-center space-x-2 whitespace-nowrap flex-shrink-0 rounded-xl text-[#02006F] hover:scale-105 transition-transform shadow-md cursor-pointer"
           >
             <span>{lang === 'fr' ? 'Accéder aux outils de calcul' : 'Access Calculators'}</span>
             <ExternalLink className="w-4.5 h-4.5" />
@@ -66,12 +66,12 @@ export const ContactAndTools: React.FC<ContactAndToolsProps> = ({ lang }) => {
         {/* Main Contact Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           
-          {/* Left Column: Direct Details */}
+          {/* Left Column: Direct Contact Info Cards with Light Blue Hover Glow */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 70, scale: 0.93 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: false, amount: 0.12 }}
+            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-5 space-y-6"
           >
             <span className="font-display font-extrabold text-[14px] uppercase tracking-wider text-[#FFC000]">
@@ -91,23 +91,23 @@ export const ContactAndTools: React.FC<ContactAndToolsProps> = ({ lang }) => {
             <div className="space-y-4 pt-2 font-sans text-[16px]">
               <a
                 href={`tel:${COMPANY_INFO.phoneClean}`}
-                className="flex items-center space-x-4 p-4 rounded-xl bg-[#1F2366] border border-white/15 hover:border-[#FFC000] hover:shadow-[0_0_25px_rgba(255,192,0,0.2)] hover:-translate-y-1 transition-all duration-300 group"
+                className="flex items-center space-x-4 p-4 rounded-xl bg-[#1F2366] border border-white/15 hover:border-[#38BDF8] hover:shadow-[0_15px_40px_rgba(56,189,248,0.45)] hover:-translate-y-2 transition-all duration-500 group"
               >
-                <Phone className="w-5 h-5 text-[#FFC000]" />
+                <Phone className="w-5 h-5 text-[#FFC000] group-hover:text-[#38BDF8] transition-colors duration-300" />
                 <div>
                   <span className="text-white/70 block text-[13px] uppercase font-bold">Téléphone</span>
-                  <span className="text-white group-hover:text-[#FFC000] transition-colors font-bold text-[17px]">{COMPANY_INFO.phone}</span>
+                  <span className="text-white group-hover:text-[#38BDF8] transition-colors duration-300 font-bold text-[17px]">{COMPANY_INFO.phone}</span>
                 </div>
               </a>
 
               <a
                 href={`mailto:${COMPANY_INFO.email}`}
-                className="flex items-center space-x-4 p-4 rounded-xl bg-[#1F2366] border border-white/15 hover:border-[#FFC000] hover:shadow-[0_0_25px_rgba(255,192,0,0.2)] hover:-translate-y-1 transition-all duration-300 group"
+                className="flex items-center space-x-4 p-4 rounded-xl bg-[#1F2366] border border-white/15 hover:border-[#38BDF8] hover:shadow-[0_15px_40px_rgba(56,189,248,0.45)] hover:-translate-y-2 transition-all duration-500 group"
               >
-                <Mail className="w-5 h-5 text-[#FFC000]" />
+                <Mail className="w-5 h-5 text-[#FFC000] group-hover:text-[#38BDF8] transition-colors duration-300" />
                 <div>
                   <span className="text-white/70 block text-[13px] uppercase font-bold">Email</span>
-                  <span className="text-white group-hover:text-[#FFC000] transition-colors font-bold text-[17px]">{COMPANY_INFO.email}</span>
+                  <span className="text-white group-hover:text-[#38BDF8] transition-colors duration-300 font-bold text-[17px]">{COMPANY_INFO.email}</span>
                 </div>
               </a>
 
@@ -115,12 +115,12 @@ export const ContactAndTools: React.FC<ContactAndToolsProps> = ({ lang }) => {
                 href={COMPANY_INFO.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center space-x-4 p-4 rounded-xl bg-[#1F2366] border border-white/15 hover:border-[#FFC000] hover:shadow-[0_0_25px_rgba(255,192,0,0.2)] hover:-translate-y-1 transition-all duration-300 group"
+                className="flex items-center space-x-4 p-4 rounded-xl bg-[#1F2366] border border-white/15 hover:border-[#38BDF8] hover:shadow-[0_15px_40px_rgba(56,189,248,0.45)] hover:-translate-y-2 transition-all duration-500 group"
               >
-                <ExternalLink className="w-5 h-5 text-[#FFC000]" />
+                <ExternalLink className="w-5 h-5 text-[#FFC000] group-hover:text-[#38BDF8] transition-colors duration-300" />
                 <div>
                   <span className="text-white/70 block text-[13px] uppercase font-bold">WhatsApp</span>
-                  <span className="text-white group-hover:text-[#FFC000] transition-colors font-bold text-[17px]">Échanger sur WhatsApp →</span>
+                  <span className="text-white group-hover:text-[#38BDF8] transition-colors duration-300 font-bold text-[17px]">Échanger sur WhatsApp →</span>
                 </div>
               </a>
             </div>
@@ -138,15 +138,15 @@ export const ContactAndTools: React.FC<ContactAndToolsProps> = ({ lang }) => {
 
           </motion.div>
 
-          {/* Right Column: WHITE Form Panel with Deep Blue Focus */}
+          {/* Right Column: Form Panel with Light Blue Glow */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 70, scale: 0.93 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: false, amount: 0.12 }}
+            transition={{ duration: 1.0, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-7"
           >
-            <div className="p-8 sm:p-10 rounded-2xl bg-white text-[#111827] border border-gray-200/80 shadow-xl hover:border-[#02006F] hover:shadow-[0_0_30px_rgba(2,0,111,0.2)] transition-all duration-300">
+            <div className="p-8 sm:p-10 rounded-2xl bg-white text-[#111827] border border-gray-200/80 shadow-xl hover:border-[#38BDF8] hover:shadow-[0_18px_45px_rgba(56,189,248,0.45)] hover:-translate-y-2 transition-all duration-500">
               {submitted ? (
                 <div className="text-center py-12 space-y-4">
                   <CheckCircle className="w-14 h-14 text-[#FFC000] mx-auto" />
@@ -160,7 +160,7 @@ export const ContactAndTools: React.FC<ContactAndToolsProps> = ({ lang }) => {
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="btn-yellow px-6 py-3 text-[16px] font-extrabold uppercase rounded-xl text-[#02006F]"
+                    className="btn-yellow px-6 py-3 text-[16px] font-extrabold uppercase rounded-xl text-[#02006F] cursor-pointer"
                   >
                     Envoyer un autre message
                   </button>
@@ -175,7 +175,7 @@ export const ContactAndTools: React.FC<ContactAndToolsProps> = ({ lang }) => {
                         required
                         value={formData.firstName}
                         onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                        className="w-full h-13 px-4 rounded-xl bg-[#F8FAFC] border border-gray-300 text-[16px] text-[#111827] focus:outline-none focus:border-[#02006F] focus:ring-2 focus:ring-[#02006F]/20 transition-all"
+                        className="w-full h-13 px-4 rounded-xl bg-[#F8FAFC] border border-gray-300 text-[16px] text-[#111827] focus:outline-none focus:border-[#38BDF8] focus:ring-2 focus:ring-[#38BDF8]/20 transition-all"
                       />
                     </div>
                     <div>
@@ -185,7 +185,7 @@ export const ContactAndTools: React.FC<ContactAndToolsProps> = ({ lang }) => {
                         required
                         value={formData.lastName}
                         onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                        className="w-full h-13 px-4 rounded-xl bg-[#F8FAFC] border border-gray-300 text-[16px] text-[#111827] focus:outline-none focus:border-[#02006F] focus:ring-2 focus:ring-[#02006F]/20 transition-all"
+                        className="w-full h-13 px-4 rounded-xl bg-[#F8FAFC] border border-gray-300 text-[16px] text-[#111827] focus:outline-none focus:border-[#38BDF8] focus:ring-2 focus:ring-[#38BDF8]/20 transition-all"
                       />
                     </div>
                   </div>
@@ -198,7 +198,7 @@ export const ContactAndTools: React.FC<ContactAndToolsProps> = ({ lang }) => {
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full h-13 px-4 rounded-xl bg-[#F8FAFC] border border-gray-300 text-[16px] text-[#111827] focus:outline-none focus:border-[#02006F] focus:ring-2 focus:ring-[#02006F]/20 transition-all"
+                        className="w-full h-13 px-4 rounded-xl bg-[#F8FAFC] border border-gray-300 text-[16px] text-[#111827] focus:outline-none focus:border-[#38BDF8] focus:ring-2 focus:ring-[#38BDF8]/20 transition-all"
                       />
                     </div>
                     <div>
@@ -208,7 +208,7 @@ export const ContactAndTools: React.FC<ContactAndToolsProps> = ({ lang }) => {
                         required
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full h-13 px-4 rounded-xl bg-[#F8FAFC] border border-gray-300 text-[16px] text-[#111827] focus:outline-none focus:border-[#02006F] focus:ring-2 focus:ring-[#02006F]/20 transition-all"
+                        className="w-full h-13 px-4 rounded-xl bg-[#F8FAFC] border border-gray-300 text-[16px] text-[#111827] focus:outline-none focus:border-[#38BDF8] focus:ring-2 focus:ring-[#38BDF8]/20 transition-all"
                       />
                     </div>
                   </div>
@@ -219,7 +219,7 @@ export const ContactAndTools: React.FC<ContactAndToolsProps> = ({ lang }) => {
                       type="text"
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      className="w-full h-13 px-4 rounded-xl bg-[#F8FAFC] border border-gray-300 text-[16px] text-[#111827] focus:outline-none focus:border-[#02006F] focus:ring-2 focus:ring-[#02006F]/20 transition-all"
+                      className="w-full h-13 px-4 rounded-xl bg-[#F8FAFC] border border-gray-300 text-[16px] text-[#111827] focus:outline-none focus:border-[#38BDF8] focus:ring-2 focus:ring-[#38BDF8]/20 transition-all"
                     />
                   </div>
 
@@ -230,13 +230,13 @@ export const ContactAndTools: React.FC<ContactAndToolsProps> = ({ lang }) => {
                       required
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full p-4 rounded-xl bg-[#F8FAFC] border border-gray-300 text-[16px] text-[#111827] focus:outline-none focus:border-[#02006F] focus:ring-2 focus:ring-[#02006F]/20 transition-all"
+                      className="w-full p-4 rounded-xl bg-[#F8FAFC] border border-gray-300 text-[16px] text-[#111827] focus:outline-none focus:border-[#38BDF8] focus:ring-2 focus:ring-[#38BDF8]/20 transition-all"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="btn-yellow w-full h-13 text-[16px] font-black uppercase tracking-wide flex items-center justify-center space-x-2 rounded-xl shadow-md text-[#02006F] hover:scale-102 transition-transform"
+                    className="btn-yellow w-full h-13 text-[16px] font-black uppercase tracking-wide flex items-center justify-center space-x-2 rounded-xl shadow-md text-[#02006F] hover:scale-102 transition-transform cursor-pointer"
                   >
                     <Send className="w-5 h-5" />
                     <span>{lang === 'fr' ? 'Transmettre ma demande' : 'Submit Request'}</span>
