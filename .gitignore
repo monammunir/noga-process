@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Large 3D binary models (>100MB GitHub limit)
+lab.glb
+public/models/lab.glb
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
