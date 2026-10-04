@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --noga-navy: #02006F;
+    --noga-navy-dark: #07005F;
+    --noga-navy-card: #1F2366;
+    --noga-yellow: #FFC000;
+    --noga-yellow-hover: #FFD34D;
+    --noga-light: #F7F8FC;
+    --noga-text: #111827;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'DM Sans', 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: #02006F;
+    color: #FFFFFF;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+.font-display {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* Background Engineering Grid with Original Opacity */
+.bg-noga-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Hero Soft Radial Glow behind 3D Model */
+.hero-radial-glow {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 192, 0, 0.18) 0%,
+    rgba(34, 51, 232, 0.12) 40%,
+    transparent 72%
+  );
+}
+
+/* Grounding Shadow beneath 3D Scene */
+.grounding-shadow {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.35) 45%,
+    transparent 75%
+  );
+}
+
+/* Original Yellow Gold CTA Button */
+.btn-yellow {
+  background-color: #FFC000;
+  color: #02006F;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  border-radius: 999px;
+  transition: all 0.2s ease;
+  box-shadow: 0 8px 24px rgba(255, 192, 0, 0.25);
+}
+
+.btn-yellow:hover {
+  background-color: #FFD34D;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(255, 192, 0, 0.35);
+}
+
+/* Original Navy Primary Button (Used in Light Sections) */
+.btn-navy {
+  background-color: #1F2366;
+  color: #FFFFFF;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  box-shadow: 0 6px 20px rgba(31, 35, 102, 0.2);
+}
+
+.btn-navy:hover {
+  background-color: #02006F;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px rgba(31, 35, 102, 0.3);
+}
+
+/* Secondary Link with Underline */
+.link-underlined {
+  color: #1F2366;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: #FFC000;
+  transition: color 0.2s ease;
+}
+
+.link-underlined:hover {
+  color: #02006F;
+}
+
+/* Active Nav Underline */
+.nav-link-active {
+  color: #FFC000 !important;
+  position: relative;
+}
+
+.nav-link-active::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #FFC000;
+  border-radius: 2px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #02006F;
+}
+::-webkit-scrollbar-thumb {
+  background: #FFC000;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FFD34D;
+}
