@@ -30,10 +30,10 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onLanguageChange, onOpenCo
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#02006F]/95 backdrop-blur-md border-b border-white/10 py-3 shadow-xl'
-          : 'bg-[#02006F] py-4 border-b border-white/10'
+          ? 'bg-[#02006F]/95 backdrop-blur-md border-b border-white/10 py-3 shadow-2xl'
+          : 'bg-transparent py-5 border-b border-transparent'
       }`}
     >
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -44,11 +44,11 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onLanguageChange, onOpenCo
             <img
               src="/images/logo.png"
               alt="Noga Process"
-              className="h-10 w-auto object-contain bg-white/90 p-1.5 rounded-lg"
+              className="h-10 w-auto object-contain bg-white/90 p-1.5 rounded-lg shadow-md"
             />
           </a>
 
-          {/* Desktop Nav Links - Minimum 16px Font Size */}
+          {/* Desktop Nav Links */}
           <nav className="hidden md:flex items-center space-x-8 font-display font-bold text-[16px]">
             {navLinks.map((link, idx) => (
               <a
@@ -68,7 +68,7 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onLanguageChange, onOpenCo
           {/* Actions: Compact FR/EN Switcher & Yellow Gold CTA Button */}
           <div className="hidden sm:flex items-center space-x-4">
             {/* Compact Language Toggle */}
-            <div className="flex items-center bg-[#1F2366] border border-white/20 rounded-full p-0.5 font-display font-bold text-[14px]">
+            <div className="flex items-center bg-[#1F2366]/80 backdrop-blur-md border border-white/20 rounded-full p-0.5 font-display font-bold text-[14px]">
               <button
                 onClick={() => onLanguageChange('fr')}
                 className={`px-3 py-1 rounded-full transition-colors ${
@@ -91,10 +91,10 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onLanguageChange, onOpenCo
               </button>
             </div>
 
-            {/* Bright Gold Yellow CTA Button - Minimum 16px Font Size */}
+            {/* Bright Gold Yellow CTA Button */}
             <button
               onClick={onOpenContact}
-              className="btn-yellow px-5 py-2.5 text-[16px] font-extrabold flex items-center space-x-2 shadow-md rounded-xl"
+              className="btn-yellow px-5 py-2.5 text-[16px] font-extrabold flex items-center space-x-2 shadow-md rounded-xl cursor-pointer"
             >
               <span>{lang === 'fr' ? 'Contactez-nous' : 'Contact Us'}</span>
               <ArrowRight className="w-4 h-4" />
